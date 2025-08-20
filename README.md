@@ -5,6 +5,13 @@ This repository contains the source code for our best XGBoost model, achieving a
 ### Kaggle Write-Up
 [4th Solution: XGBoost Model](https://www.kaggle.com/competitions/aeroclub-recsys-2025/writeups/4th-solution-xgboost-model)
 
+
+### Environment Requirements
+- **Python Version:** 3.11
+- **Memory:** Running the full training pipeline (loading the dataset and feature engineering) requires approximately **400 GB of RAM**
+- **GPU:** Recommended for accelerating XGBoost model training
+
+
 ### File Structure
 
 ```txt
@@ -27,7 +34,7 @@ This repository contains the source code for our best XGBoost model, achieving a
 1. Download the data from [Kaggle Aeroclub RecSys 2025 Data](https://www.kaggle.com/competitions/aeroclub-recsys-2025/data) and place it in the `./data/` directory. Follow the instructions to unzip `jsons_raw.tar.kaggle`.
 2. Create a Conda environment and install the required packages from `requirements.txt`:
     ```bash
-    conda create -n FlightRank python=3.10
+    conda create -n FlightRank python=3.11
     conda activate FlightRank
     pip install -r requirements.txt
     ```
