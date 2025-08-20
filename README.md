@@ -47,3 +47,4 @@ This repository contains the source code for our best XGBoost model, achieving a
    - `TRAIN_ALL_SIZE` — size of the dataset when modifying the training set.
 6. To add more features, modify or add functions in `feature.py` and include them in the `feature_engineering` workflow.
 7. For feature selection, update the `FeatureSpec` class in `feature_specs.py` by adding or removing features as needed.
+8. To use a trained model for predictions, go to the "Model Training" cell in `flight.ipynb`, uncomment the code that loads the model, and comment out the code that performs training.

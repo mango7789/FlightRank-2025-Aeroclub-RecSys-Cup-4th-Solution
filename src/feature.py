@@ -39,6 +39,51 @@ def get_rank_bin_expr(rank_col: str, bin_edges: list[int], bin_col: str):
     return expr
 
 
+def drop_unused_cols(df: pl.DataFrame):
+    exclude = []
+    # Exclude columns with large missing ratio
+    for leg in [0, 1]:
+        for seg in [1]:
+            suffixes = [
+                # Missing
+                # "aircraft_code",
+                # "arrivalTo_airport_city_iata",
+                # "arrivalTo_airport_iata",
+                "baggageAllowance_quantity",
+                "baggageAllowance_weightMeasurementType",
+                # "cabinClass",
+                # "departureFrom_airport_iata",
+                # "flightNumber",
+                # "marketingCarrier_code",
+                # "operatingCarrier_code",
+                # "seatsAvailable",
+            ]
+            for suffix in suffixes:
+                exclude.append(f"legs{leg}_segments{seg}_{suffix}")
+
+    # Exclude segment 2-3 columns (>98% missing)
+    for leg in [0, 1]:
+        for seg in [2, 3]:
+            for suffix in [
+                "aircraft_code",
+                "arrivalTo_airport_city_iata",
+                # "arrivalTo_airport_iata",
+                "baggageAllowance_quantity",
+                "baggageAllowance_weightMeasurementType",
+                # "cabinClass",
+                "departureFrom_airport_iata",
+                "duration",
+                "flightNumber",
+                "marketingCarrier_code",
+                "operatingCarrier_code",
+                "seatsAvailable",
+            ]:
+                exclude.append(f"legs{leg}_segments{seg}_{suffix}")
+
+    df = df.drop(exclude)
+    return df
+
+
 ###########################################################
 #                     Feature Engineering                 #
 ###########################################################
@@ -1653,6 +1698,9 @@ def feature_engineering(df, full):
 
     # Segment feature
     df = build_segment_features(df)
+
+    # Drop cols to reduce memeory usage
+    df = drop_unused_cols(df)
 
     # More derived features
     df = df.with_columns(

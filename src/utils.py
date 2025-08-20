@@ -143,7 +143,7 @@ def hitrate_at_3_verbose(y_true, y_pred, groups, features_df=None):
     return hit_stats["hit"].mean(), failed_full
 
 
-def re_rank(test: pl.DataFrame, submission_xgb: pl.DataFrame, penalty_factor=0.12):
+def re_rank(test: pl.DataFrame, submission_xgb: pl.DataFrame, penalty_factor=0.1):
     COLS_TO_COMPARE = [
         "legs0_departureAt",
         "legs0_arrivalAt",
