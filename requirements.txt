@@ -1,0 +1,6 @@
+lightgbm==4.6.0
+matplotlib==3.10.5
+numpy==2.3.2
+polars==1.32.3
+scipy==1.16.1
+xgboost==3.0.4
